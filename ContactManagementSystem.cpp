@@ -6,8 +6,6 @@ using namespace std;
 
 #define Max 1000
 
-unordered_map<string, vector<int, string>> contact_map;
-
 struct Contact
 {
     string name;
@@ -19,27 +17,14 @@ struct Contact
 
 struct ContactBook
 {
-    Contact contactArr[Max];
+    unordered_map<string, Contact> contactMap;
     int contactCount = 0;
 };
-
-/*
-temp = ["Mike", 1, 25, "2024556655", "123 max street"]
-
-max=1000
-contactArr[
-    ["John", 1, 25, "4104676702", "123 min street"],
-    ["Mike", 1, 25, "2024556655", "123 max street"],
-    ["Teqwon", 1, 25, "4434445555", "123 alt street]
-]
-
-
-*/
 
 void menu();
 void addContact(ContactBook &);
 void showContacts(ContactBook &);
-int hasContact(ContactBook &, string);
+// int hasContact(ContactBook &, string);
 void delContact(ContactBook &);
 void findContact(ContactBook &);
 void editContact(ContactBook &);
@@ -48,8 +33,8 @@ void formatContacts(ContactBook &);
 int main()
 {
     int select = 0;
-
     ContactBook contact;
+    contact.contactMap.reserve(Max);
     contact.contactCount = 0;
 
     while (true)
@@ -116,15 +101,16 @@ void addContact(ContactBook &contact)
 {
     if (contact.contactCount == Max)
     {
-        cout << "Contact-Book is full!" << endl;
+        cout << "Address book is full!" << endl;
     }
+
     else
     {
         // Get name for contact
         string getName;
         cout << "Enter name: " << endl;
         cin >> getName;
-        contact.contactArr[contact.contactCount].name = getName;
+        // contact.contactMap[contact.contactCount].name = getName;
 
         // Get age for contact
         int getGender;
@@ -138,7 +124,7 @@ void addContact(ContactBook &contact)
             cin >> getGender;
             if (getGender == 1 || getGender == 2)
             {
-                contact.contactArr[contact.contactCount].gender = getGender;
+                // contact.contactArr[contact.contactCount].gender = getGender;
                 break;
             }
             cout << "Please enter (1 -> Male) or (2 -> Female) Thank You!" << endl;
@@ -148,7 +134,7 @@ void addContact(ContactBook &contact)
         int getAge;
         cout << "Please enter age: " << endl;
         cin >> getAge;
-        contact.contactArr[contact.contactCount].age = getAge;
+        // contact.contactArr[contact.contactCount].age = getAge;
 
         // Get phone number for contact
         string getPhone;
@@ -160,7 +146,7 @@ void addContact(ContactBook &contact)
             cin >> getPhone;
             if (getPhone.size() == 10)
             {
-                contact.contactArr[contact.contactCount].phone = getPhone;
+                // contact.contactArr[contact.contactCount].phone = getPhone;
                 break;
             }
             cout << "Please make sure you enter a 10-digit phone number, Thank You!" << endl;
@@ -170,42 +156,54 @@ void addContact(ContactBook &contact)
         string getAddr;
         cout << "Please enter an address: " << endl;
         cin >> getAddr;
-        contact.contactArr[contact.contactCount].address = getAddr;
+        // contact.contactArr[contact.contactCount].address = getAddr;
+
+        vector<Contact> con;
+        con.push_back(Contact());
+        con[contact.contactCount].name;
+        con[contact.contactCount].gender;
+        con[contact.contactCount].age;
+        con[contact.contactCount].phone;
+        con[contact.contactCount].address;
+
+        // contact.contactMap[getName] = con;
+        // [getName, getGender, getAge, getPhone, getAddr]
+
 
         // increment the contact counter in the Contact Book
         contact.contactCount += 1;
-        cout << "Contact " << contact.contactArr[contact.contactCount].name << "added successfully!!" << endl;
+        // cout << "Contact " << contact.contactArr[contact.contactCount].name << "added successfully!!" << endl;
     }
 }
 
 void showContacts(ContactBook &contact)
 {
-    if (contact.contactCount == 0)
-    {
-        cout << "There are no contacts saved.." << endl;
-    }
-    else
-    {
-        for (int i = 0; i < contact.contactCount; i++)
-        {
-            cout << "Contact #" << i + 1 << " --> Name: " << contact.contactArr[i].name << "Gender: " << (contact.contactArr[i].gender != 2 ? "Male" : "Female") << "Age: " << contact.contactArr[i].age << "Phone-Number: " << contact.contactArr[i].phone << "Address: " << contact.contactArr[i].address << endl;
-        }
-    }
-    system("pause");
-    system("cls");
+    // if (contact.contactCount == 0)
+    // {
+    //     cout << "There are no contacts saved.." << endl;
+    // }
+    // else
+    // {
+    //     for (int i = 0; i < contact.contactCount; i++)
+    //     {
+    //         cout << "Contact #" << i + 1 << " --> Name: " << contact.contactArr[i].name << "Gender: " << (contact.contactArr[i].gender != 2 ? "Male" : "Female") << "Age: " << contact.contactArr[i].age << "Phone-Number: " << contact.contactArr[i].phone << "Address: " << contact.contactArr[i].address << endl;
+    //     }
+    // }
+    // system("pause");
+    // system("cls");
 }
 
-int hasContact(ContactBook &contact, string name)
-{
-    for (int i = 0; i < contact.contactCount; i++)
-    {
-        if (contact.contactArr[i].name == name)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
+// int hasContact(ContactBook &contact, string name)
+// {
+//     // for (int i = 0; i < contact.contactCount; i++)
+//     // {
+//     //     if (contact.contactArr[i].name == name)
+//     //     {
+//     //         return i;
+//     //     }
+//     // }
+//     // return -1;
+// }
 
 void delContact(ContactBook &contact)
 {
