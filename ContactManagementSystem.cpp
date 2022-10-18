@@ -2,22 +2,21 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-using namespace std;
 
 #define Max 1000
 
 struct Contact
 {
-    string name;
-    int gender = 1;
-    int age = 0;
-    string phone;
-    string address;
+    std::string name;
+    int gender;
+    int age;
+    std::string phone;
+    std::string address;
 };
 
 struct ContactBook
 {
-    unordered_map<string, Contact> contactMap;
+    std::unordered_map<std::string, Contact> contactMap;
     int contactCount = 0;
 };
 
@@ -32,7 +31,8 @@ void formatContacts(ContactBook &);
 
 int main()
 {
-    int select = 0;
+    int select;
+    bool appRuns = true;
     
     // address book instance that contains the hashmap with the Contact struct as its value
     ContactBook contactbook;
@@ -44,13 +44,12 @@ int main()
     // setting my contact count to 0
     contactbook.contactCount = 0;
 
-    while (true)
+    while (appRuns)
     {
         menu();
+        std::cin >> select;
 
-        cin >> select;
         switch (select)
-        
         {
         case 1:
             addContact(contactbook, contact);
@@ -76,106 +75,100 @@ int main()
             formatContacts(contactbook);
             break;
 
-        case 0:
-            cout << "Thank You For Using Contact Management System! We Hope To See You Again Soon." << endl;
+        case 7:
+            std::cout << "Thank You For Using Contact Management System! We Hope To See You Again Soon." << std::endl;
             system("pause");
-            break;
-            return 0;
-
-        default:
+            appRuns = false;
             break;
         }
     }
+
     system("pause");
     return 0;
 }
 
 void menu()
 {
-    cout << "****************************************" << endl;
-    cout << "******  Contact Management System ******" << endl;
-    cout << "******       1. Add Contact        *****" << endl;
-    cout << "******       2. Show Contact       *****" << endl;
-    cout << "******       3. Delete Contact     *****" << endl;
-    cout << "******       4. Find Contact       *****" << endl;
-    cout << "******       5. Edit Contact       *****" << endl;
-    cout << "******       6. Format Contact     *****" << endl;
-    cout << "******       0. Exit               *****" << endl;
-    cout << "****************************************" << endl;
-    cout << "****************************************" << endl;
+    std::cout << "****************************************" << std::endl;
+    std::cout << "******  Contact Management System ******" << std::endl;
+    std::cout << "******       1. Add Contact        *****" << std::endl;
+    std::cout << "******       2. Show Contact       *****" << std::endl;
+    std::cout << "******       3. Delete Contact     *****" << std::endl;
+    std::cout << "******       4. Find Contact       *****" << std::endl;
+    std::cout << "******       5. Edit Contact       *****" << std::endl;
+    std::cout << "******       6. Format Contact     *****" << std::endl;
+    std::cout << "******       7. Exit               *****" << std::endl;
+    std::cout << "****************************************" << std::endl;
+    std::cout << "****************************************" << std::endl;
 }
 
 void addContact(ContactBook &contactbook, Contact contact)
 {
     if (contactbook.contactCount == Max)
     {
-        cout << "Address book is full!" << endl;
+        std::cout << "Address book is full!" << std::endl;
     }
 
     else
     {
-        // Get name for contact
-        string getName;
-        cout << "Enter name: " << endl;
-        cin >> getName;
+        // // Get name for contact
+        // std::string getName;
+        // std::cout << "Enter name: " << std::endl;
+        // std::cin >> getName;
+        // std::getline(std::cin, getName);
 
-        // Get age for contact
-        int getGender;
-        cout << "Please enter gender: " << endl;
-        cout << "1 --> Male" << endl;
-        cout << "2 --> Female" << endl;
+        // // Get age for contact
+        // int getGender;
+        // std::cout << "Please enter gender: \n1 --> Male\n2 --> Female" << std::endl;
+        // std::cin >> getGender;
 
-        // Verify whether the user input a 1 or 2 for the gender
-        while (true)
-        {
-            cin >> getGender;
-            if (getGender == 1 || getGender == 2)
-            {
-                break;
-            }
-            cout << "Please enter (1 -> Male) or (2 -> Female) Thank You!" << endl;
-        }
+        // // Verify whether the user input a 1 or 2 for the gender
+        // while (getGender < 1 || getGender > 2)
+        // {
+        //     std::cout << "Error: you did not answer correctly!" << std::endl;
+        //     std::cout << "Please enter gender: \n1 --> Male\n2 --> Female" << std::endl;
+        //     std::cin >> getGender;
+        // }
 
-        // Get age for contact
-        int getAge;
-        cout << "Please enter age: " << endl;
-        cin >> getAge;
+        // // Get age for contact
+        // int getAge;
+        // std::cout << "Please enter age: " << std::endl;
+        // std::cin >> getAge;
 
         // Get phone number for contact
-        string getPhone;
-        cout << "Please enter phone number (no spaces): " << endl;
+        std::string getPhone;
+        std::cout << "Please enter phone number (no spaces): " << std::endl;
+        std::cin >> getPhone;
+        // std::getline(std::cin, getPhone); // just incase the user does enter a space I dont want the code to break
 
+        std::cout << "phone number: " << getPhone << ".length(): " << getPhone.length() << ".size()" << getPhone.size() << std::endl;
         // Makes sure phone numbers is atleast 10-digits
-        while (true)
-        {
-            cin >> getPhone;
-            if (getPhone.size() == 10)
-            {
-                break;
-            }
-            cout << "Please make sure you enter a 10-digit phone number, Thank You!" << endl;
-        }
+        // while (getPhone.length() != 10)
+        // {
+        //     std::cout << "Error: you did not answer correctly!" << std::endl;
+        //     std::cout << "Please enter phone number (no spaces): " << std::endl;
+        // }
 
         // Gets contact address
-        string getAddr;
-        cout << "Please enter an address: " << endl;
-        cin >> getAddr;
+        std::string getAddr;
+        std::cout << "Please enter an address: " << std::endl;
+        std::cin >> getAddr;
+        std::getline(std::cin, getAddr);
 
         // [getName, getGender, getAge, getPhone, getAddr]
-        contact.name = getName;
-        contact.gender = getGender;
-        contact.age = getAge;
+        // contact.name = getName;
+        // contact.gender = getGender;
+        // contact.age = getAge;
         contact.phone = getPhone;
         contact.address = getAddr;
 
-
-        contactbook.contactMap[getName] = contact;
+        // contactbook.contactMap[getName] = contact;
 
         // increment the contact counter in the Contact Book
         contactbook.contactCount += 1;
 
-        cout << "Contact " << getName << " added successfully!!" << endl;
-        cout << endl;
+        // std::cout << "Contact " << getName << " added successfully!!" << std::endl;
+        std::cout << std::endl;
     }
 }
 
@@ -183,13 +176,13 @@ void showContacts(ContactBook &contactbook)
 {
     if (contactbook.contactCount == 0)
     {
-        cout << "There are no contacts saved.." << endl;
+        std::cout << "There are no contacts saved.." << std::endl;
     }
     else
     {
         for (auto i: contactbook.contactMap)
         {
-            cout << "Contact Name: " << i.first << "Gender: " << (i.second.gender != 2 ? "Male" : "Female") << "Age: " << i.second.age << "Phone-Number: " << i.second.phone << "Address: " << i.second.address << endl;
+            std::cout << "Contact Name: " << i.first << "Gender: " << (i.second.gender != 2 ? "Male" : "Female") << "Age: " << i.second.age << "Phone-Number: " << i.second.phone << "Address: " << i.second.address << std::endl;
         }
     }
     system("pause");
