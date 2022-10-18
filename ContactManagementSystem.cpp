@@ -33,7 +33,7 @@ int main()
 {
     int select;
     bool appRuns = true;
-    
+
     // address book instance that contains the hashmap with the Contact struct as its value
     ContactBook contactbook;
     Contact contact;
@@ -111,43 +111,46 @@ void addContact(ContactBook &contactbook, Contact contact)
 
     else
     {
-        // // Get name for contact
-        // std::string getName;
-        // std::cout << "Enter name: " << std::endl;
-        // std::cin >> getName;
-        // std::getline(std::cin, getName);
+        // Get name for contact
+        std::string getName;
+        std::cout << "Enter name: " << std::endl;
+        std::cin >> getName;
+        std::getline(std::cin, getName);
 
-        // // Get age for contact
-        // int getGender;
-        // std::cout << "Please enter gender: \n1 --> Male\n2 --> Female" << std::endl;
-        // std::cin >> getGender;
+        // Get age for contact
+        int getGender;
+        std::cout << "Please enter gender: \n1 --> Male\n2 --> Female" << std::endl;
+        std::cin >> getGender;
 
-        // // Verify whether the user input a 1 or 2 for the gender
-        // while (getGender < 1 || getGender > 2)
-        // {
-        //     std::cout << "Error: you did not answer correctly!" << std::endl;
-        //     std::cout << "Please enter gender: \n1 --> Male\n2 --> Female" << std::endl;
-        //     std::cin >> getGender;
-        // }
+        // Verify whether the user input a 1 or 2 for the gender
+        while (getGender < 1 || getGender > 2)
+        {
+            std::cout << "Error: you did not answer correctly!" << std::endl;
+            std::cout << "Please enter gender: \n1 --> Male\n2 --> Female" << std::endl;
+            std::cin >> getGender;
+        }
 
-        // // Get age for contact
-        // int getAge;
-        // std::cout << "Please enter age: " << std::endl;
-        // std::cin >> getAge;
+        // Get age for contact
+        int getAge;
+        std::cout << "Please enter age: " << std::endl;
+        std::cin >> getAge;
 
         // Get phone number for contact
         std::string getPhone;
         std::cout << "Please enter phone number (no spaces): " << std::endl;
+
+        // insert a Try Catch block here just incase a user has a space between its number
+
         std::cin >> getPhone;
-        // std::getline(std::cin, getPhone); // just incase the user does enter a space I dont want the code to break
+        std::getline(std::cin, getPhone); // just incase the user does enter a space I dont want the code to break
 
         std::cout << "phone number: " << getPhone << ".length(): " << getPhone.length() << ".size()" << getPhone.size() << std::endl;
         // Makes sure phone numbers is atleast 10-digits
-        // while (getPhone.length() != 10)
-        // {
-        //     std::cout << "Error: you did not answer correctly!" << std::endl;
-        //     std::cout << "Please enter phone number (no spaces): " << std::endl;
-        // }
+        while (getPhone.length() != 10)
+        {
+            std::cout << "Error: you did not answer correctly!" << std::endl;
+            std::cout << "Please enter phone number (no spaces): " << std::endl;
+        }
 
         // Gets contact address
         std::string getAddr;
@@ -180,7 +183,7 @@ void showContacts(ContactBook &contactbook)
     }
     else
     {
-        for (auto i: contactbook.contactMap)
+        for (auto i : contactbook.contactMap)
         {
             std::cout << "Contact Name: " << i.first << "Gender: " << (i.second.gender != 2 ? "Male" : "Female") << "Age: " << i.second.age << "Phone-Number: " << i.second.phone << "Address: " << i.second.address << std::endl;
         }
